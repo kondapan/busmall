@@ -101,19 +101,33 @@ function displayPic() {
   setPicDisplayStatus(this.getAttribute('src'), false);
   Picture.allPics[randomIdx].increaseShown();
   this.src = Picture.allPics[randomIdx].fileUrl;
-  removeListeners();
+  checkMaxClicks();
+}
+
+function checkMaxClicks(){
+  if(maxSelections === totalSelections) {
+    removeListeners();
+    writeResults();
+  }
 }
 
 function removeListeners(){
-  if(maxSelections === totalSelections) {
-    var imgObject1 = document.getElementById('img1');
-    imgObject1.removeEventListener('click', displayPic);
+  var imgObject1 = document.getElementById('img1');
+  imgObject1.removeEventListener('click', displayPic);
 
-    var imgObject2 = document.getElementById('img2');
-    imgObject2.removeEventListener('click', displayPic);
+  var imgObject2 = document.getElementById('img2');
+  imgObject2.removeEventListener('click', displayPic);
 
-    var imgObject3 = document.getElementById('img3');
-    imgObject3.removeEventListener('click', displayPic);
+  var imgObject3 = document.getElementById('img3');
+  imgObject3.removeEventListener('click', displayPic);
+}
+
+function writeResults(){
+  var tableObj = document.getElementById('results-table');
+  for(var t=0; t<Picture.allPics.length; t++){
+    var newRow = document.createElement('tr');
+    newRow.innerHTML = `<td>${Picture.allPics[t].numClicks} votes for ${Picture.allPics[t].name}</td>`;
+    tableObj.appendChild(newRow);
   }
 }
 

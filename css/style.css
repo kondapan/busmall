@@ -12,7 +12,16 @@ body {
 }
 
 img {
-    margin-top: 5vw;
-    width: 50%;
+    margin-top: 2vw;
+    width: 33%;
     float: left;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+tr {
+    padding: 2vw;
+    text-align: left;
+  }
